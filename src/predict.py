@@ -1,11 +1,3 @@
-"""
-predict.py — Predicción de riesgo crediticio para nuevos clientes.
-
-Requiere que train.py haya sido ejecutado previamente para generar:
-  - ../models/decision_tree.pkl
-  - ../models/label_encoder.pkl
-  - ../models/feature_columns.pkl
-"""
 
 import sys
 import os
