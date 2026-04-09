@@ -5,6 +5,7 @@ Catalogar correctamente el riesgo de los préstamos solicitados por los clientes
 
 ## Metodología: CRISP-DM
 Se sigue la metodología CRISP-DM, la cual consta de las siguientes fases:
+<img width="578" height="564" alt="image" src="https://github.com/user-attachments/assets/53c266f7-15e3-4c16-968b-02507ff478fa" />
 
 1. Entendimiento del negocio  
 2. Entendimiento de los datos  
@@ -119,17 +120,19 @@ Se implementará un modelo de árbol de decisión para clasificar el riesgo cred
 
 Implementación en código.
 
+Se ejecuta python train.py, programa que nos ayudará a entrenar el árbol de decisión:
+<img width="1139" height="349" alt="image" src="https://github.com/user-attachments/assets/40609a50-3085-4262-b6f5-6185733f8dec" />
+
+Se ejecuta python predict.py, programa que predice dos clientes que fueron evaluados:
+<img width="365" height="183" alt="image" src="https://github.com/user-attachments/assets/956101ec-366f-4e21-8563-86ff692e5e4c" />
+
+
 ## 5. Evaluación
+<img width="451" height="323" alt="image" src="https://github.com/user-attachments/assets/dd458660-70e8-4267-b669-668f43564db7" />
 
-Se evaluará el modelo mediante métricas como:
+Dado el desbalance en la distribución de clases del dataset donde la clase Bajo representa la gran mayoría de los registros frente a Alto y Medio, fue necesario incorporar el parámetro class_weight="balanced" en el DecisionTreeClassifier. Sin este ajuste, el modelo tendía a clasificar casi todos los casos como Bajo, obteniendo un accuracy artificialmente alto del 83% pero fallando completamente en detectar las clases minoritarias (recall de 0.01 para Alto y 0.00 para Medio). Al aplicar el balanceo, el algoritmo penaliza proporcionalmente los errores en las clases con menor representación, forzando al modelo a prestarles atención durante el entrenamiento.
 
-- Exactitud (Accuracy)  
-- Matriz de confusión  
-- Precisión  
-- Recall  
-- F1-score  
-
-Pendiente: Resultados de evaluación.
+Con este ajuste, el accuracy global descendió al 60.38%, lo cual es esperado y no debe interpretarse como un deterioro del modelo, simplemente ya no se beneficia del sesgo hacia la clase mayoritaria. Los resultados muestran mejoras sustanciales donde más importa: Medio pasó de un recall de 0.00 a 0.95, logrando identificar correctamente 217 de 228 casos, y Alto mejoró de 0.01 a 0.28, acertando 318 de 1,125. La clase Bajo redujo su recall de 1.00 a 0.65, lo cual es un sacrificio necesario y aceptable para lograr un modelo más equilibrado y útil en la práctica. En un contexto de riesgo crediticio, no detectar un cliente de riesgo Alto o Medio es mucho más costoso que clasificar incorrectamente uno de riesgo Bajo, por lo que este trade-off está justificado.
 
 ## 6. Despliegue
 - No realizado.
