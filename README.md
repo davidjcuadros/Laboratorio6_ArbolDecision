@@ -136,3 +136,11 @@ Con este ajuste, el accuracy global descendió al 60.38%, lo cual es esperado y 
 
 ## 6. Despliegue
 - No realizado.
+
+## Comandos para ejecutar:
+
+```bash
+pip install -r requirements.txt 
+python train.py 
+python predict.py
+```
